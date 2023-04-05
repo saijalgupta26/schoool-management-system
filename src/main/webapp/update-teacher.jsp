@@ -29,7 +29,7 @@
 
   <input type="email" name="email" value="<%= updatingTeacher.getEmail()%>"><br><br>
   <label>Course</label>
-  <input type="text" name="section" value="<%= updatingTeacher.getSubject()%>"><br><br>
+  <input type="text" name="course" value="<%= updatingTeacher.getSubject()%>"><br><br>
 
   <button>Update</button>
 

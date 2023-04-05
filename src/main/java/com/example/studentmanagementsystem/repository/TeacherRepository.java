@@ -62,15 +62,23 @@ public class TeacherRepository {
 
     public void register(Teacher teacher) {
         try {
+            System.out.println("sasa");
             PreparedStatement statement = conn.prepareStatement("insert into teacher values(?, ?, ?, ?,?)");
             statement.setString(1,teacher.getUsername());
-            statement.setString(2,teacher.getPassword());
+            System.out.println(teacher);
+
+            statement.setString(2,teacher.getName());
             statement.setString(3, teacher.getEmail());
+            System.out.println("ssasasasasasas");
             statement.setString(4,teacher.getPassword());
+            System.out.println("ssasasasasasas");
             statement.setString(5,teacher.getSubject());
-
-
+            System.out.println("ssasasasasasas");
             statement.executeUpdate();
+            System.out.println("ssasasasasasas");
+
+
+
         } catch (Exception e) {
             System.out.println("inside save of TeacherRepository");
         }
@@ -79,6 +87,7 @@ public class TeacherRepository {
 
     public void delete(String username) {
         try {
+            System.out.println("deleteeeertretertrtrtrt");
 
             PreparedStatement statement = conn.prepareStatement("delete from teacher where username = ?");
 
@@ -89,5 +98,30 @@ public class TeacherRepository {
             System.out.println("inside catch of delete of teacherRepository");
             e.printStackTrace();
         }
+    }
+
+    public Teacher findByTeacherName(String username) {
+        Teacher teacher = null;
+        try {
+
+            PreparedStatement statement = conn.prepareStatement("select * from teacher where username = ?");
+            statement.setString(1,username);
+            ResultSet resultSet = statement.executeQuery();
+            System.out.println(username);
+            if(resultSet.next()) {
+                String name = resultSet.getString(3);
+                String email = resultSet.getString(4);
+                String password = resultSet.getString(2);
+                String subject=resultSet.getString(5);
+
+
+                teacher = new Teacher(username,name,email,password,subject);
+            }
+        }
+        catch (Exception e) {
+            System.out.println("inside catch of find() of StudentRepository");
+            e.printStackTrace();
+        }
+        return teacher;
     }
 }

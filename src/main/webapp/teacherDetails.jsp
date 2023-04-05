@@ -37,6 +37,8 @@
     <th scope="col">Email</th>
 
     <th scope="col">Subject_Studied</th>
+    <th scope="col">delete</th>
+    <th scope="col">update</th>
   </tr>
   </thead>
   <tbody>

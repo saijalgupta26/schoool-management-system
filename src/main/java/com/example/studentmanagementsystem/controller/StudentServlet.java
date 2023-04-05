@@ -31,10 +31,7 @@ public class StudentServlet extends HttpServlet {
             {
 
             }
-            case "view":
-            {
 
-            }
         }
 
         }
@@ -59,7 +56,7 @@ public class StudentServlet extends HttpServlet {
                 int rollno= Integer.parseInt(request.getParameter("rollno"));
 
                 System.out.println(username + ", " + password + ", " + name + ", " + email+ ", "+rollno);
-                Student student = new Student(username, password, name, email,section,rollno,false);
+                Student student = new Student(username, password, name, email,section,rollno,false,0,0,0);
                 studentService.register(student);
                 PrintWriter writer = response.getWriter();
                 break;

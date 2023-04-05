@@ -30,4 +30,8 @@ public class StudentService {
     public void update(Student student1) {
         studentRepository.update(student1);
     }
+
+    public void delete(String username) {
+        studentRepository.delete(username);
+    }
 }

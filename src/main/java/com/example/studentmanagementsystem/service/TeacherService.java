@@ -24,4 +24,8 @@ public class TeacherService {
     public void delete(String username) {
         teacherRepository.delete(username);
     }
+
+    public Teacher findByUserName(String username) {
+        return teacherRepository.findByTeacherName(username);
+    }
 }

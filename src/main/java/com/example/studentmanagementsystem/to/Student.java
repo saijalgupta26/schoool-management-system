@@ -15,8 +15,11 @@ public class Student {
     private int rollno;
     private String section;
     private Boolean isBlocked;
+    private int javaMarks;
+    private  int sqlMarks;
+    private int percentage;
 
-    public Student(String username, String name, String email, String password,  String section,int rollno, Boolean isBlocked) {
+    public Student(String username, String name, String email, String password,  String section,int rollno, Boolean isBlocked,int javaMarks,int sqlMarks,int percentage) {
         this.username = username;
         this.name = name;
         this.email = email;
@@ -24,5 +27,8 @@ public class Student {
         this.rollno = rollno;
         this.section = section;
         this.isBlocked = isBlocked;
+        this.javaMarks=javaMarks;
+        this.sqlMarks=sqlMarks;
+        this.percentage=percentage;
     }
 }

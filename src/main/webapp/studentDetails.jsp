@@ -54,8 +54,13 @@
     <td><%= students.get(i).getRollno() %></td>
     <td><a href="Admin?action=delete&username=<%= students.get(i).getUsername()%>">delete</a></td>
     <td><a href="Admin?action=update&username=<%= students.get(i).getUsername()%>">update</a></td>
+    <%if(students.get(i).getIsBlocked()) {%>
+    <td><a href="Admin?action=unblock&username=<%= students.get(i).getUsername()%>">unblock</a></td>
+    <%} else {%>
+    <td><a href="Admin?action=block&username=<%= students.get(i).getUsername()%>">block</a></td>
+    <%}%>
 
-    <td><a href="user?action=block&username=<%= students.get(i).getUsername()%>">block</a></td>
+
 
 
 

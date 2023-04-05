@@ -6,6 +6,16 @@ import com.example.studentmanagementsystem.to.Admin;
 public class AdminService {
     static AdminRepository repository = new AdminRepository();
 
+    public static void block(String username) {
+
+
+        repository.block(username);
+    }
+
+    public static boolean unblock(String username) {
+        return repository.unblock(username);
+    }
+
     public void register(Admin admin) {
         repository.save(admin);
     }
@@ -15,6 +25,6 @@ public class AdminService {
     }
 
     public void delete(String username) {
-        repository.delete(username);
+        repository.studentDelete(username);
     }
 }

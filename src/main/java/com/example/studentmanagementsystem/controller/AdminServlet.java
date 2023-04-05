@@ -18,9 +18,7 @@ import java.util.List;
 @WebServlet("/Admin")
 public class AdminServlet extends HttpServlet {
 
-    public AdminServlet(){
-        System.out.println("qwertyuio");
-    }
+
     StudentService studentService=new StudentService();
     AdminService adminService=new AdminService();
     TeacherService teacherService=new TeacherService();
@@ -79,6 +77,25 @@ public class AdminServlet extends HttpServlet {
         }
         case "update-teacher":
         {
+            if(session!=null)
+            {
+                System.out.println("inside update " + username );
+
+                Teacher teacher =teacherService.findByUserName(username);
+                System.out.println(teacher);
+                session.setAttribute("updatingTeacher",teacher);
+                List<Teacher> teacher1= teacherService.findAll();
+                System.out.println(teacher1);
+                session.setAttribute("updatingData",teacher1);
+                dispatcher = request.getRequestDispatcher("update-teacher.jsp");
+                dispatcher.include(request, response);
+                break;
+            }
+            else{
+                dispatcher = request.getRequestDispatcher("index.jsp");
+                dispatcher.include(request, response);
+
+            }
 
 
         }
@@ -104,8 +121,27 @@ public class AdminServlet extends HttpServlet {
 
         case "block":
         {
+            System.out.println("inside block"+ username);
+            AdminService.block(username);
+            List<Student> students = studentService.findAll();
+            session.setAttribute("students", students);
+            RequestDispatcher dispatcher2 = request.getRequestDispatcher("adminWelcome.jsp");
+            dispatcher2.include(request, response);
+            break;
+
 
         }
+            case "unblock":
+            {
+                System.out.println("inside unblock"+ username);
+                AdminService.unblock(username);
+                List<Student> students = studentService.findAll();
+                session.setAttribute("students", students);
+                RequestDispatcher dispatcher2 = request.getRequestDispatcher("adminWelcome.jsp");
+                dispatcher2.include(request, response);
+                break;
+
+            }
 
 
         }
@@ -151,8 +187,11 @@ public class AdminServlet extends HttpServlet {
 
 
                     session.setAttribute("students", students);
+                    session.setAttribute("teachers",teachers);
                     dispatcher = request.getRequestDispatcher("adminWelcome.jsp");
                     dispatcher.include(request, response);
+
+
                 }
                 else {
                     dispatcher = request.getRequestDispatcher("index.jsp");
@@ -169,11 +208,14 @@ public class AdminServlet extends HttpServlet {
                 String email=request.getParameter("email");
                 String section=request.getParameter("section");
                 int rollno= Integer.parseInt(request.getParameter("rollno"));
+                int javaMarks= Integer.parseInt(request.getParameter("javaMarks"));
+                int sqlMarks= Integer.parseInt(request.getParameter("sqlMarks"));
+                int percentange= Integer.parseInt(request.getParameter("percentage"));
                 System.out.println(username+ ", " + name);
 
                 Student student =studentService.findByUsername(username);
                 request.setAttribute("studentData", student);
-                Student student1=new Student(username,name,email,null,section,rollno,null);
+                Student student1=new Student(username,name,email,null,section,rollno,null,javaMarks,sqlMarks,percentange);
                 System.out.println("inside controller " + student1 + ", " );
                 studentService.update(student1);
                 session.setAttribute("studentData", student1);

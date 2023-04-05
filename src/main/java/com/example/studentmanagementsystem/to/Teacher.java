@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 
 public class Teacher {
-    public Teacher(String username, String name, String email, String password,String subject) {
+    public Teacher(String username, String name, String password, String email,String subject) {
         this.username = username;
         this.name = name;
-        this.email = email;
         this.password = password;
+        this.email = email;
+
         this.subject=subject;
     }
 

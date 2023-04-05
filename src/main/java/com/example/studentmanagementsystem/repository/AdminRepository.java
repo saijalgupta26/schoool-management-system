@@ -48,7 +48,7 @@ public class AdminRepository {
 
     }
 
-    public void delete(String username) {
+    public void studentDelete(String username) {
         try {
 
             PreparedStatement statement = conn.prepareStatement("delete from student where username = ?");
@@ -60,5 +60,34 @@ public class AdminRepository {
             System.out.println("inside catch of delete of AdminRepository");
             e.printStackTrace();
         }
+    }
+
+    public boolean block(String username) {
+        try {
+            PreparedStatement statement = conn.prepareStatement("update student set isBlocked=true where username = ?");
+            statement.setString(1, username);
+            statement.executeUpdate();
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println("inside catch of block of studentRepository");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean unblock(String username) {
+        try {
+            PreparedStatement statement = conn.prepareStatement("update student set isBlocked=false where username = ?");
+            statement.setString(1, username);
+            statement.executeUpdate();
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println("inside catch of unblock of studentRepository");
+            e.printStackTrace();
+            return false;
+        }
+
     }
 }
